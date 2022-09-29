@@ -16,6 +16,12 @@ return new class extends Migration
         Schema::create('ninjas', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->foreignId("user_id")->nullable()->constrained()->nullOnDelete();
+            $table->string("name");
+            $table->text("description");
+            $table->string("village");
+            $table->string("rank");
+            $table->string("gender");
         });
     }
 
