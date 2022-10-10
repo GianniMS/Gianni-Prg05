@@ -9,27 +9,10 @@
     <link rel="stylesheet" href="">
 </head>
 <body>
-<header>
-    <div>
-        @if (Route::has('login'))
-            <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
-                @auth
-                    <a href="{{ url('/home') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Home</a>
-                @else
-                    <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Log in</a>
-
-                    @if (Route::has('register'))
-                        <a href="{{ route('register') }}"
-                           class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Register</a>
-                    @endif
-                @endauth
-            </div>
-        @endif
-    </div>
-</header>
 <div class="container">
     <div class="row">
         <div class="column">
+            <h4>{{ $Title }}</h4>
             @if(Session::get('succes'))
                 <div class=" alert alert-succes">
                     {{ Session::get('succes') }}
@@ -41,80 +24,49 @@
                 </div>
             @endif
 
-            <form action="add" method="post">
+            <form action="{{ route('update') }}" method="post">
                 @csrf
+                <input type="hidden" name="cid" value="{{ $Info->id }}">
                 <div class="form-group">
                     <label for="">Character Name</label>
                     <input type="text" class="form-control" name="name" placeholder="Enter name"
-                           value="{{ old('name') }}">
+                           value="{{ $Info->name }}">
                     <span>@error('name'){{ $message }} @enderror</span>
                 </div>
                 <div class="form-group">
                     <label for="">Village</label>
                     <input type="text" class="form-control" name="village" placeholder="Enter village name"
-                           value="{{ old('village') }}">
+                           value="{{ $Info->village }}">
                     <span>@error('village'){{ $message }} @enderror</span>
                 </div>
                 <div class="form-group">
                     <label for="">Age</label>
                     <input type="number" class="form-control" name="age" placeholder="Enter character age"
-                           value="{{ old('age') }}">
+                           value="{{ $Info->age }}">
                     <span>@error('age'){{ $message }} @enderror</span>
                 </div>
                 <div class="form-group">
                     <label for="">Rank</label>
                     <input type="text" class="form-control" name="rank" placeholder="Enter rank"
-                           value="{{ old('rank') }}">
+                           value="{{ $Info->rank }}">
                     <span>@error('rank'){{ $message }} @enderror</span>
                 </div>
                 <div class="form-group">
                     <label for="">Gender</label>
                     <input type="text" class="form-control" name="gender" placeholder="Enter gender"
-                           value="{{ old('gender') }}">
+                           value="{{ $Info->gender }}">
                     <span>@error('gender'){{ $message }} @enderror</span>
                 </div>
                 <div class="form-group">
                     <label for="">Description</label>
                     <input type="text" class="form-control" name="description" placeholder="Enter description"
-                           value="{{ old('description') }}">
+                           value="{{ $Info->description }}">
                     <span>@error('description'){{ $message }} @enderror</span>
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="button">Register Ninja</button>
+                    <button type="submit" class="button">Edit Ninja</button>
                 </div>
             </form>
-        </div>
-        <div class="container">
-            <table class="">
-                <thead>
-                <th>Name</th>
-                <th>Village</th>
-                <th>Age</th>
-                <th>Rank</th>
-                <th>Gender</th>
-                <th>Description</th>
-                <th>Actions</th>
-                </thead>
-                <tbody>
-                @foreach($list as $item)
-                <tr>
-                    <td>{{ $item->name }}</td>
-                    <td>{{ $item->village }}</td>
-                    <td>{{ $item->age }}</td>
-                    <td>{{ $item->rank }}</td>
-                    <td>{{ $item->gender }}</td>
-                    <td>{{ $item->description }}</td>
-                    <td>
-                        <div class="button-group">
-                            <a href="" class="btn-danger"><button>Delete</button></a>
-                            <a href="edit/{{ $item->id }}" class="btn-edit"><button>Edit</button></a>
-                        </div>
-                    </td>
-                </tr>
-                @endforeach
-                </tbody>
-            </table>
-        </div>
     </div>
 </div>
 </body>

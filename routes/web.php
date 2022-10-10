@@ -23,3 +23,5 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('/index', [LaravelCrud::class, 'index']);
 Route::post('add', [LaravelCrud::class, 'add']);
+Route::get('edit/{id}', [LaravelCrud::class, 'edit']);
+Route::post('update', [LaravelCrud::class, 'update'])->name('update');
