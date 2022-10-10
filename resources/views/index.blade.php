@@ -19,7 +19,8 @@
                     <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Log in</a>
 
                     @if (Route::has('register'))
-                        <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Register</a>
+                        <a href="{{ route('register') }}"
+                           class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Register</a>
                     @endif
                 @endauth
             </div>
@@ -27,46 +28,63 @@
     </div>
 </header>
 <div class="container">
-   <div class="row">
-      <div class="column">
-          <form action="add" method="post">
-          @csrf
-              <div class="form-group">
-                  <label for="">Character Name</label>
-                  <input type="text" class="form-control" name="name" placeholder="Enter name">
-                  <span>@error('name'){{ $message }} @enderror</span>
-              </div>
-              <div class="form-group">
-                  <label for="">Village</label>
-                  <input type="text" class="form-control" name="village" placeholder="Enter village name">
-                  <span>@error('village'){{ $message }} @enderror</span>
-              </div>
-              <div class="form-group">
-                  <label for="">Age</label>
-                  <input type="number" class="form-control" name="age" placeholder="Enter character age">
-                  <span>@error('age'){{ $message }} @enderror</span>
-              </div>
-              <div class="form-group">
-                  <label for="">Rank</label>
-                  <input type="text" class="form-control" name="rank" placeholder="Enter rank">
-                  <span>@error('rank'){{ $message }} @enderror</span>
-              </div>
-              <div class="form-group">
-                  <label for="">Gender</label>
-                  <input type="text" class="form-control" name="gender" placeholder="Enter gender">
-                  <span>@error('gender'){{ $message }} @enderror</span>
-              </div>
-              <div class="form-group">
-                  <label for="">Description</label>
-                  <input type="text" class="form-control" name="description" placeholder="Enter description">
-                  <span>@error('description'){{ $message }} @enderror</span>
-              </div>
-              <div class="form-group">
-                  <button type="submit" class="button">Register Ninja</button>
-              </div>
-          </form>
-      </div>
-   </div>
+    <div class="row">
+        <div class="column">
+            @if(Session::get('succes'))
+                <div class=" alert alert-succes">
+                    {{ Session::get('succes') }}
+                </div>
+            @endif
+            @if(Session::get('fail'))
+                <div class=" alert alert-danger">
+                    {{ Session::get('fail') }}
+                </div>
+            @endif
+
+            <form action="add" method="post">
+                @csrf
+                <div class="form-group">
+                    <label for="">Character Name</label>
+                    <input type="text" class="form-control" name="name" placeholder="Enter name"
+                           value="{{ old('name') }}">
+                    <span>@error('name'){{ $message }} @enderror</span>
+                </div>
+                <div class="form-group">
+                    <label for="">Village</label>
+                    <input type="text" class="form-control" name="village" placeholder="Enter village name"
+                           value="{{ old('village') }}">
+                    <span>@error('village'){{ $message }} @enderror</span>
+                </div>
+                <div class="form-group">
+                    <label for="">Age</label>
+                    <input type="number" class="form-control" name="age" placeholder="Enter character age"
+                           value="{{ old('age') }}">
+                    <span>@error('age'){{ $message }} @enderror</span>
+                </div>
+                <div class="form-group">
+                    <label for="">Rank</label>
+                    <input type="text" class="form-control" name="rank" placeholder="Enter rank"
+                           value="{{ old('rank') }}">
+                    <span>@error('rank'){{ $message }} @enderror</span>
+                </div>
+                <div class="form-group">
+                    <label for="">Gender</label>
+                    <input type="text" class="form-control" name="gender" placeholder="Enter gender"
+                           value="{{ old('gender') }}">
+                    <span>@error('gender'){{ $message }} @enderror</span>
+                </div>
+                <div class="form-group">
+                    <label for="">Description</label>
+                    <input type="text" class="form-control" name="description" placeholder="Enter description"
+                           value="{{ old('description') }}">
+                    <span>@error('description'){{ $message }} @enderror</span>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="button">Register Ninja</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 </body>
 </html>
