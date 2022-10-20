@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('ninjas', function (Blueprint $table) {
+        Schema::create('ninjaController', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->foreignId("user_id")->nullable()->constrained()->nullOnDelete();
@@ -33,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ninjas');
+        Schema::dropIfExists('ninjaController');
     }
 };

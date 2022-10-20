@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\LaravelCrud;
+use App\Http\Controllers\ninjaController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,15 +13,8 @@ use App\Http\Controllers\LaravelCrud;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
+Route::resource('ninjas', NinjaController::class);
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/index', [LaravelCrud::class, 'index']);
-Route::post('add', [LaravelCrud::class, 'add']);
-Route::get('edit/{id}', [LaravelCrud::class, 'edit']);
-Route::post('update', [LaravelCrud::class, 'update'])->name('update');
